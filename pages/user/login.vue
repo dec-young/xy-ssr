@@ -1,8 +1,12 @@
 <template>
-  <div class="login">登录</div>
+  <div class="login">
+   
+  </div>
+  
 </template>
 
 <script>
+
 export default {
 
 }

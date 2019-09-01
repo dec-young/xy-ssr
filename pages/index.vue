@@ -1,13 +1,19 @@
 <template>
-  <div class="index">首页</div>
+  <div class="index">
+    
+  </div>
 </template>
 
 <script>
 export default {
-
+  data(){
+    return{
+      
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+ 
 </style>
