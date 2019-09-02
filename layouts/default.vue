@@ -2,7 +2,6 @@
   <div>
     <Header />
     <nuxt />
-    <br />
     <Footer />
   </div>
 </template>
@@ -56,7 +55,4 @@ a:hover {
   color: inherit;
 }
 
-Footer {
-  margin-top: 500px;
-}
 </style>
