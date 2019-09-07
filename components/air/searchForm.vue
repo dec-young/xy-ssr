@@ -22,7 +22,7 @@
           placeholder="请搜索出发城市"
           @select="handleDepartSelect"
           class="el-autocomplete"
-          v-model="form.DepartCity"
+          v-model="form.departCity"
         ></el-autocomplete>
       </el-form-item>
       <el-form-item label="到达城市">
@@ -31,7 +31,7 @@
           placeholder="请搜索到达城市"
           @select="handleDestSelect"
           class="el-autocomplete"
-          v-model="form.DestCity"
+          v-model="form.destCity"
         ></el-autocomplete>
       </el-form-item>
       <el-form-item label="出发时间">
@@ -41,7 +41,7 @@
           placeholder="请选择日期"
           style="width: 100%;"
           @change="handleDate"
-          v-model="form.DepartDate"
+          v-model="form.departDate"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label>
@@ -65,11 +65,11 @@ export default {
       ],
       currentTab: 0,
       form: {
-        DepartCity: "",
-        Departcode: "",
-        DestCity: "",
+        departCity: "",
+        departcode: "",
+        destCity: "",
         destCode: "",
-        DepartDate: ""
+        departDate: ""
       }
     }
   },
@@ -95,7 +95,7 @@ export default {
           name: value
         }
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         const { data } = res.data;
         const newData = [];
         data.forEach(v => {
@@ -103,8 +103,8 @@ export default {
           newData.push(v);
         });
         // 默认显示第一个查询出的结果
-        this.form.DepartCity = newData[0].value
-        this.form.Departcode = newData[0].sort
+        this.form.departCity = newData[0].value
+        this.form.departcode = newData[0].sort
         cb(newData);
       });
     },
@@ -128,7 +128,7 @@ export default {
           v.value = v.name.replace("市", "");
           newData.push(v);
         });
-        this.form.DestCity = newData[0].value
+        this.form.destCity = newData[0].value
         this.form.destCode = newData[0].sort
         cb(newData);
       });
@@ -136,46 +136,46 @@ export default {
 
     // 出发城市下拉选择时触发,选择下拉城市后把后台返回城市和值把存到form中
     handleDepartSelect(item) {
-      this.form.DepartCity = item.value;
-      this.form.Departcode = item.sort;
+      this.form.departCity = item.value;
+      this.form.departcode = item.sort;
     },
 
     // 目标城市下拉选择时触发
     handleDestSelect(item) {
-      this.form.DestCity = item.value;
+      this.form.destCity = item.value;
       this.form.destCode = item.sort;
     },
 
     // 确认选择日期时触发
     handleDate(value) {
       //  console.log(value);
-      this.form.DepartDate = moment(value).format(`YYYY-MM-DD`);
+      this.form.departDate = moment(value).format(`YYYY-MM-DD`);
     },
 
     // 触发和目标城市切换时触发,交叉赋值
     handleReverse() {
-      const { DepartCity, DepartCode, DestCity, destCode } = this.form;
+      const { departCity, departCode, destCity, destCode } = this.form;
 
-      this.form.DepartCity = DestCity;
-      this.form.DepartCode = destCode;
+      this.form.departCity = destCity;
+      this.form.departCode = destCode;
 
-      this.form.DestCity = DepartCity;
-      this.form.destCode = DepartCode;
+      this.form.destCity = departCity;
+      this.form.destCode = departCode;
     },
 
     // 提交表单时触发
     handleSubmit() {
         // console.log(this.form)
-        const {DepartCity,DestCity,DepartDate} = this.form
-        if(!DepartCity){
+        const {departCity,destCity,departDate} = this.form
+        if(!departCity){
             this.$alert('请输入出发城市','提示')
             return
         }
-        if(!DestCity){
+        if(!destCity){
             this.$alert('请输入到达城市','提示')
             return
         }
-        if(!DepartDate){
+        if(!departDate){
             this.$alert('请选择触发日期','提示')
         }
         this.$router.push({
