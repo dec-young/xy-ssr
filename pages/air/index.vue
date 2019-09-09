@@ -42,7 +42,7 @@
       <el-row class="air-sale-pic" type="flex" justify="space-between">
         <el-col :span="6" v-for="(item,index) in sales" :key="index">
           <nuxt-link
-            :to="`/air/flights?departCity=${item.departCity}&departCode=${item.departCode}&destCity=${item.destCity}&$destCode=${item.destCode}&departDate=${item.departDate}`"
+            :to="`/air/flights?departCity=${item.departCity}&departCode=${item.departCode}&destCity=${item.destCity}&destCode=${item.destCode}&departDate=${item.departDate}`"
           >
             <img :src="item.cover" />
             <el-row class="layer-bar" type="flex" justify="space-between">

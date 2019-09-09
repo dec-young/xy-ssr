@@ -66,7 +66,7 @@ export default {
       currentTab: 0,
       form: {
         departCity: "",
-        departcode: "",
+        departCode: "",
         destCity: "",
         destCode: "",
         departDate: ""
@@ -104,7 +104,7 @@ export default {
         });
         // 默认显示第一个查询出的结果
         this.form.departCity = newData[0].value
-        this.form.departcode = newData[0].sort
+        this.form.departCode = newData[0].sort
         cb(newData);
       });
     },
@@ -137,7 +137,7 @@ export default {
     // 出发城市下拉选择时触发,选择下拉城市后把后台返回城市和值把存到form中
     handleDepartSelect(item) {
       this.form.departCity = item.value;
-      this.form.departcode = item.sort;
+      this.form.departCode = item.sort;
     },
 
     // 目标城市下拉选择时触发
@@ -176,12 +176,20 @@ export default {
             return
         }
         if(!departDate){
-            this.$alert('请选择触发日期','提示')
+            this.$alert('请选择出发日期','提示')
         }
+
+        // 把搜索记录保存到本地
+        const airs = JSON.parse(localStorage.getItem('airs') || `[]`) 
+        airs.push(this.form)
+        localStorage.setItem('airs',JSON.stringify(airs))
+
         this.$router.push({
             path:'/air/flights',
             query: this.form
         })
+
+        
     }
   },
   mounted() {}
